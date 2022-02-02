@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<dds version="5.2.0" xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/5.2.0/rti_dds_profiles.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<qos_library name="MyQosLibrary">
+    <qos_profile name="MyQosProfile" is_default_qos="true">
+        <base_name>
+            <!--<element>BuiltinQosLib::Generic.StrictReliable.LowLatency</element>-->
+        </base_name>
+    </qos_profile>
+</qos_library>
+
+<types>
+
+   <struct name="TypeRadio">
+	<member name="Altura" type="float" key="False"/>
+	<member name="Pitch" type="float" key="False"/>
+	<member name="Roll" type="float" key="False"/>
+	<member name="Yaw" type="float" key="False"/>
+   </struct>
+   <struct name="TypeAttitude">
+	<member name="Altura" type="float" key="False"/>
+	<member name="Pitch" type="float" key="False"/>
+	<member name="Roll" type="float" key="False"/>
+	<member name="Yaw" type="float" key="False"/>
+   </struct>
+   <struct name="TypeInterfaz">
+	<member name="kp_pitch" type="float" key="False"/>
+	<member name="ki_pitch" type="float" key="False"/>
+	<member name="kd_pitch" type="float" key="False"/>
+	<member name="wg_pitch" type="float" key="False"/>
+        <member name="kp_roll" type="float" key="False"/>
+        <member name="ki_roll" type="float" key="False"/>
+        <member name="kd_roll" type="float" key="False"/>
+	<member name="wg_roll" type="float" key="False"/>
+        <member name="kp_yaw" type="float" key="False"/>
+        <member name="ki_yaw" type="float" key="False"/>
+        <member name="kd_yaw" type="float" key="False"/>
+	<member name="wg_yaw" type="float" key="False"/>
+   </struct>
+   <struct name="TypePID_pitch">
+	<member name="Pitch"  type="float" key="False"/> 
+   </struct>
+   <struct name="TypePID_roll">
+	<member name="Roll" type="float" key="False"/>
+   </struct>
+   <struct name="TypePID_yaw">
+	<member name="Yaw" type="float" key="False"/>
+   </struct>
+   <struct name="TypeMixer">
+        <member name="Servo1"  type="float" key="False"/> 
+        <member name="Servo2"  type="float" key="False"/>
+        <member name="Servo3"  type="float" key="False"/>
+	<member name="Servo4"  type="float" key="False"/>	
+   </struct>
+   <struct name="TypeMixerMotor">
+	<member name="VelocidadMotor" type="float" key="False"/>
+   </struct>
+
+</types>
+
+<!-- Domain Library -->
+<domain_library name="MyDomainLibrary">
+    
+    <domain name="DominioSensor" domain_id="0">
+	<register_type name="TypeRadio" type_ref="TypeRadio" kind="dynamicData"/>
+	<register_type name="TypeAttitude" type_ref="TypeAttitude" kind="dynamicData"/>
+	<register_type name="TypePID_pitch" type_ref="TypePID_pitch" kind="dynamicData"/>
+	<register_type name="TypePID_roll" type_ref="TypePID_roll" kind="dynamicData"/>
+	<register_type name="TypePID_yaw" type_ref="TypePID_yaw" kind="dynamicData"/>	
+	<register_type name="TypeMixer" type_ref="TypeMixer" kind="dynamicData"/>
+	<register_type name="TypeMixerMotor" type_ref="TypeMixerMotor" kind="dynamicData"/>
+	<register_type name="TypeInterfaz" type_ref="TypeInterfaz" kind="dynamicData"/>
+
+	<topic name="TopicoRadio" register_type_ref="TypeRadio"/>
+	<topic name="TopicoAttitude" register_type_ref="TypeAttitude"/>
+	<topic name="TopicoPID_pitch" register_type_ref="TypePID_pitch"/>
+	<topic name="TopicoPID_roll" register_type_ref="TypePID_roll"/>
+	<topic name="TopicoPID_yaw" register_type_ref="TypePID_yaw"/>
+	<topic name="TopicoMixer" register_type_ref="TypeMixer"/>
+	<topic name="TopicoMixerMotor" register_type_ref="TypeMixerMotor"/>
+	<topic name="TopicoInterfaz" register_type_ref="TypeInterfaz"/>
+    </domain>
+
+</domain_library>
+
+<!-- Participant library -->
+<participant_library name="MyParticipantLibrary">
+
+   <domain_participant name="ParticipantePublicador" domain_ref="MyDomainLibrary::DominioSensor">
+        <publisher name="Publicador">
+	    <data_writer name="EscritorRadio" topic_ref="TopicoRadio"/>
+	    <data_writer name="EscritorAttitude" topic_ref="TopicoAttitude"/>
+	    <data_writer name="EscritorPID_pitch" topic_ref="TopicoPID_pitch"/>
+	    <data_writer name="EscritorPID_roll" topic_ref="TopicoPID_roll"/>
+	    <data_writer name="EscritorPID_yaw" topic_ref="TopicoPID_yaw"/>
+	    <data_writer name="EscritorMixer" topic_ref="TopicoMixer"/>
+	    <data_writer name="EscritorMixerMotor" topic_ref="TopicoMixerMotor"/>
+	    <data_writer name="EscritorInterfaz" topic_ref="TopicoInterfaz"/>
+        </publisher>
+   </domain_participant>
+
+   <domain_participant name="ParticipanteSuscriptor" domain_ref="MyDomainLibrary::DominioSensor">
+        <subscriber name="Suscriptor">
+	    <data_reader name="LectorRadio" topic_ref="TopicoRadio"/>
+	    <data_reader name="LectorAttitude" topic_ref="TopicoAttitude"/>
+	    <data_reader name="LectorPID_pitch" topic_ref="TopicoPID_pitch"/>
+	    <data_reader name="LectorPID_roll" topic_ref="TopicoPID_roll"/>
+	    <data_reader name="LectorPID_yaw" topic_ref="TopicoPID_yaw"/>
+	    <data_reader name="LectorMixer" topic_ref="TopicoMixer"/>
+	    <data_reader name="LectorMixerMotor" topic_ref="TopicoMixerMotor"/>
+      	    <data_reader name="LectorInterfaz" topic_ref="TopicoInterfaz"/>
+        </subscriber>
+   </domain_participant>
+
+</participant_library>
+</dds>

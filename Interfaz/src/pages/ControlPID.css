@@ -1,0 +1,79 @@
+
+input[type=float] {
+    padding: 5px;
+    margin: 30px 30px;
+    border-radius:20px;
+    position: relative;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    border: 0;
+    background-color: rgb(33, 37, 41);
+}
+
+input[type=submit]{
+    padding:5px;
+    border-radius:20px;
+    width: 200px;
+    background-color: rgb(115, 233, 241);
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+form{
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 5px;
+    border-radius: 20px;
+    text-align: center;
+    height: 53vh;
+}
+h2 {
+    font-weight: 500;
+    font-size: 1.4rem;
+    font-family: sans-serif;
+    font-size: 25px;
+    color: #eee;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+body {
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+#parent {
+    background-color: rgb(33, 37, 41);
+    border-radius: 0px;
+    box-sizing: border-box;
+    width: 86.2vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.param{
+	color:#fff
+}
+
+#pitch{
+    margin-top: -25vh;
+}
+
+#roll{
+    margin-top: -25vh;
+}
+
+#yaw{
+    margin-top: -25vh;
+}
